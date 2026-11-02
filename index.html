@@ -12,6 +12,7 @@ label{display:block;font-weight:600;margin:10px 0 4px} select,input[type=range]{
 .w{display:flex;justify-content:space-between;color:var(--ink2);font-size:13px}
 table{width:100%;border-collapse:collapse;font-size:14px} th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right} th:first-child,td:first-child{text-align:left}
 tr.rec td{background:#FBF1E6;font-weight:600} .tag{font-size:12px;padding:1px 6px;border-radius:8px;background:#E8F2EC;color:var(--ok)} .dom{color:#9AA3A0}
+.hint{color:var(--ink2);font-size:12.5px;margin:0 0 4px;line-height:1.35} ul.alist{margin:8px 0 0;padding-left:0;list-style:none;font-size:13px;color:var(--ink2)} ul.alist li{margin:2px 0} ul.alist b{color:var(--ink)}
 .big{font-size:20px;font-weight:700;color:var(--acc)} .note{color:var(--ink2);font-size:13px}
 .intro{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:20px;margin-bottom:16px} @media(max-width:800px){.intro{grid-template-columns:1fr}}
 .intro h2,.maps h2{font-size:16px;margin:0 0 8px}
@@ -30,10 +31,12 @@ dl.def{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-si
 <div class="card intro">
 <div>
 <h2>Seçenekler: A0–A5 nedir?</h2>
+<p class="hint"><b>A</b> = alternatif, yani soğutma seçeneği. Her seçenek, bir set değeri ile evaporatif ön soğutmanın açık ya da kapalı olmasının birleşimidir.</p>
 <table class="mx" id="mx"><thead><tr><th></th><th>23 °C</th><th>25 °C</th><th>27 °C</th></tr></thead><tbody>
 <tr><th>Evaporatif ön soğutma kapalı</th><td id="m0"><b>A0</b><span>taban</span></td><td id="m1"><b>A1</b></td><td id="m2"><b>A2</b></td></tr>
 <tr><th>Evaporatif ön soğutma açık</th><td id="m3"><b>A3</b></td><td id="m4"><b>A4</b></td><td id="m5"><b>A5</b></td></tr>
 </tbody></table>
+<ul class="alist"><li><b>A0</b>: 23 °C, evaporatif kapalı (taban, karşılaştırma noktası)</li><li><b>A1</b>: 25 °C, evaporatif kapalı</li><li><b>A2</b>: 27 °C, evaporatif kapalı</li><li><b>A3</b>: 23 °C, evaporatif açık</li><li><b>A4</b>: 25 °C, evaporatif açık</li><li><b>A5</b>: 27 °C, evaporatif açık</li></ul>
 <div class="lg"><span><i style="background:#FBF1E6;outline:2px solid var(--acc)"></i>önerilen</span><span><i style="background:#E8F2EC"></i>Pareto etkin</span><span><i style="background:var(--card);border:1px solid var(--line)"></i>baskılanmış</span></div>
 </div>
 <dl class="def">
@@ -47,9 +50,9 @@ dl.def{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-si
 </div>
 <div class="grid">
 <div class="card">
-<label for="wy">Hava yılı</label><select id="wy"></select>
-<label for="gy">Şebeke ve fiyat yılı</label><select id="gy"></select>
-<label for="ws">Suya verilen ağırlık: <span id="wv"></span></label><input id="ws" type="range" min="0" max="1" step="0.01" value="0.25">
+<label for="wy">Hava yılı</label><p class="hint">Hesapta hangi yılın saatlik sıcaklık ve nem verisinin kullanılacağı (ERA5-Land, 1991–2025). Sıcak yıllarda dış havayla soğutulabilen saat azalır; enerji ve su değişir.</p><select id="wy"></select>
+<label for="gy">Şebeke ve fiyat yılı</label><p class="hint">Hangi yılın Türkiye elektrik üretim karması ve saatlik piyasa fiyatının kullanılacağı (EPİAŞ, 2021–2025). Yalnız CO₂ ve maliyeti değiştirir; enerji ve suyu değiştirmez.</p><select id="gy"></select>
+<label for="ws">Suya verilen ağırlık: <span id="wv"></span></label><p class="hint">Karar vericinin suya ne kadar önem verdiği: 0 = hiç, 1 = yalnız su. Ağırlık arttıkça öneri, suyu az kullanan A2'ye kayar; azaldıkça enerjiyi az kullanan A5'e.</p><input id="ws" type="range" min="0" max="1" step="0.01" value="0.25">
 <div class="w"><span>enerji öncelikli</span><span>su öncelikli</span></div>
 <p class="note" id="wtxt"></p>
 <hr style="border:none;border-top:1px solid var(--line)">
